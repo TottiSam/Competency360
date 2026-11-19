@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: competency360-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: competency360
+    ports:
+      - "5432:5432"
+    volumes:
+      - competency360_data:/var/lib/postgresql/data
+volumes:
+  competency360_data:

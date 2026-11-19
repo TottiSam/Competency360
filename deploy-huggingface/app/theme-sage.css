@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+/* Sage + lime soft-UI theme. Loaded after globals.css. To go back to the rose theme, remove the import in layout.tsx. */
+:root{--sg-ink:#232623 !important;--sg-mut:#7b8178 !important;--sg-lime:#f4ff55 !important;--sg-sage:#cddfc6 !important;--sg-green:#7fb77e !important;--sg-line:#e3e6df !important}
+html body{font-family:"DM Sans",system-ui,sans-serif !important;color:var(--sg-ink) !important;background:linear-gradient(135deg,#e8ebe4,#d6dbd1) fixed !important}
+html body .app-shell,html body .app-shell::before,html body .app-shell::after,html body .main-area{background:transparent !important}
+html body :is(h1,h2,h3,h4,.dashboard-overview-title,.intelligence-kpi strong,.hero-mini-metrics strong){font-family:"DM Sans",system-ui,sans-serif !important;color:var(--sg-ink) !important;font-weight:600 !important;letter-spacing:-.02em !important}
+/* icon rail */
+html body .sidebar{background:rgba(255,255,255,.82) !important;border:0 !important;border-radius:36px !important;box-shadow:0 10px 30px rgba(60,70,55,.12) !important;backdrop-filter:blur(10px) !important}
+html body .sidebar *{color:var(--sg-mut) !important}
+html body .sidebar .brand-mark{background:var(--sg-ink) !important;color:#fff !important;border:0 !important;box-shadow:none !important}
+html body .nav-item{background:transparent !important;border:0 !important;border-radius:50% !important}
+html body .nav-item:hover{background:#eef0ea !important}
+html body .nav-item.active{background:var(--sg-ink) !important;box-shadow:0 8px 18px rgba(35,38,35,.35) !important}
+html body .nav-item.active *{color:#fff !important}
+/* top bar + cards */
+html body .topbar{background:transparent !important;border:0 !important;box-shadow:none !important}
+html body :is(.panel,.intelligence-panel,.report-header,.question-card,.list-row,.topbar-search,.hero-cycle-chip,.profile-mini){background:#fff !important;border:0 !important;border-radius:28px !important;box-shadow:0 8px 30px rgba(60,70,55,.08) !important;backdrop-filter:none !important}
+html body :is(.topbar-search,.hero-cycle-chip,.profile-mini){border-radius:999px !important}
+html body .intelligence-panel:hover,html body .intelligence-kpi:hover{transform:translateY(-2px) !important;box-shadow:0 14px 36px rgba(60,70,55,.14) !important}
+/* hero: lime */
+html body .intelligence-hero{background:linear-gradient(135deg,#f7ff6e,#e9f84a) !important;border:0 !important;border-radius:32px !important;box-shadow:0 14px 40px rgba(150,170,30,.25) !important;color:var(--sg-ink) !important}
+html body .intelligence-hero :is(h1,h2,p,span,strong,small,.intelligence-kicker){color:var(--sg-ink) !important;text-shadow:none !important}
+html body .intelligence-hero :is(.intelligence-kicker,.hero-cycle-chip){background:rgba(255,255,255,.6) !important;border:0 !important}
+/* KPI row: lime / green gradient / white */
+html body .intelligence-kpi{background:#fff !important;border:0 !important;border-radius:28px !important;box-shadow:0 8px 30px rgba(60,70,55,.08) !important}
+html body .intelligence-kpi-grid>.intelligence-kpi:nth-child(1){background:linear-gradient(#f7ff6e,#ecfa4b) !important}
+html body .intelligence-kpi-grid>.intelligence-kpi:nth-child(2){background:linear-gradient(#fff,#cddfc6) !important}
+html body .intelligence-kpi strong{font-size:40px !important;font-weight:500 !important}
+html body .kpi-symbol{background:rgba(255,255,255,.7) !important;color:var(--sg-ink) !important}
+/* buttons */
+html body .button.primary{background:var(--sg-ink) !important;color:#fff !important;border:0 !important;border-radius:999px !important;box-shadow:0 8px 20px rgba(35,38,35,.25) !important}
+html body .button.primary *{color:#fff !important}
+html body .button.secondary,html body .intelligence-link,html body .panel-period{background:#fff !important;color:var(--sg-ink) !important;border:1px solid var(--sg-line) !important;border-radius:999px !important}
+html body :is(input,select,textarea){border-radius:999px !important;background:#f1f3ee !important;border-color:transparent !important}
+/* charts + rings */
+html body .priority-chart-track{background:#e8ebe3 !important}
+html body .priority-chart-track i{background:linear-gradient(90deg,#a9cfa3,var(--sg-green)) !important}
+html body .priority-chart-track>span{background:var(--sg-ink) !important;border-color:#fff !important}
+html body .health-ring{--ring-color:var(--sg-green) !important}
+/* tables */
+html body th{background:#f1f4ec !important;color:var(--sg-mut) !important}
+html body :is(.summary-line,.formula-note){background:linear-gradient(#f4f6ef,#dfe9d9) !important;border-radius:18px !important}
+html body .scale-option.selected,html body .rating-buttons .chosen{background:var(--sg-ink) !important;color:#fff !important;border-color:var(--sg-ink) !important}
+/* report header with 5 fields */
+html body .report-header{grid-template-columns:repeat(auto-fit,minmax(150px,1fr)) !important}
+html body .topbar-search input{background:transparent !important;border:0 !important;box-shadow:none !important}
+html body .hero-cycle-chip,html body .hero-cycle-chip *{color:#232623 !important}
+html body .hero-cycle-chip{background:rgba(255,255,255,.75) !important}
+html body :is(.hero-mini-metrics,.health-ring,.panel,.intelligence-panel,.topbar,.report-header,table) *{font-family:"DM Sans",system-ui,sans-serif !important}
+html body .sidebar .profile-mini,html body .sidebar .avatar{background:var(--sg-ink) !important;border:0 !important;color:#fff !important}
+html body .formula-note{background:transparent !important;box-shadow:none !important;border-radius:0 !important}

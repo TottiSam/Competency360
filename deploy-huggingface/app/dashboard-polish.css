@@ -1,0 +1,54 @@
+/* Competency360 dashboard polish — loaded LAST. Single source of truth for shell layout.
+   Fixes the sidebar/content gap: an old rule set the grid column to 224px while the sidebar is a slim rail. */
+html body .app-shell{display:grid!important;grid-template-columns:88px minmax(0,1fr)!important;gap:20px!important;width:100%!important;max-width:none!important;margin:0!important;padding:18px 22px 24px!important;align-items:start!important}
+html body .sidebar{width:88px!important;position:sticky!important;top:18px!important;height:calc(100vh - 36px)!important;min-height:520px!important;padding:14px 0!important;align-items:center!important;z-index:40!important}
+html body .main-area{width:100%!important;max-width:none!important;min-width:0!important;margin:0!important;overflow:visible!important}
+html body .page-content{max-width:1680px!important;margin:0 auto!important;padding:22px clamp(18px,2.4vw,36px) 40px!important}
+html body .intelligence-dashboard{gap:18px!important}
+html body .intelligence-kpi-grid{gap:16px!important;align-items:stretch!important}
+html body .intelligence-main-grid{gap:18px!important;align-items:stretch!important}
+html body .intelligence-side-stack{gap:18px!important}
+html body .intelligence-kpi{min-height:128px!important;height:100%!important;cursor:pointer;position:relative}
+html body .intelligence-kpi:focus-visible,html body .snapshot-person:focus-visible{outline:2px solid #232623;outline-offset:3px}
+html body .intelligence-kpi:active{transform:scale(.985)!important}
+/* hero numbers were pale-on-lime */
+html body .hero-mini-metrics b{color:#232623!important;font-size:34px!important;font-weight:600!important}
+html body .hero-mini-metrics small{color:#4a5043!important}
+/* nav tooltips */
+html body .nav-item::after{content:attr(aria-label);position:absolute;left:calc(100% + 14px);top:50%;transform:translate(-6px,-50%);background:#232623;color:#fff!important;font-size:11px;font-weight:600;padding:7px 11px;border-radius:10px;white-space:nowrap;opacity:0;pointer-events:none;transition:.18s;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+html body .nav-item:hover::after,html body .nav-item:focus-visible::after{opacity:1;transform:translate(0,-50%)}
+html body .nav-item{overflow:visible!important}
+/* search */
+html body .topbar-search{width:min(360px,34vw)!important;transition:box-shadow .2s}
+html body .topbar-search:focus-within{box-shadow:0 0 0 3px rgba(35,38,35,.14),0 8px 24px rgba(60,70,55,.12)!important}
+html body .topbar-search kbd{font:600 10px 'DM Sans',sans-serif;color:#7b8178;background:#eef0ea;border-radius:6px;padding:3px 7px}
+/* table toolbar */
+.table-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.chip-btn{border:1px solid #e3e6df;background:#fff;color:#4a5043;border-radius:999px;padding:7px 13px;font-size:11px;font-weight:600;transition:.18s;display:inline-flex;align-items:center;gap:6px}
+.chip-btn:hover{background:#f1f4ec}
+.chip-btn.on{background:#232623;color:#fff;border-color:#232623}
+.chip-btn.export{background:#f4ff55;border-color:#e4ee3a;color:#232623}
+.chip-btn.export:hover{background:#ecf63a}
+html body .table-panel tbody tr{transition:background .15s}
+html body .table-panel tbody tr:hover{background:#f6f9ef}
+/* motion */
+@keyframes c360-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes c360-bob{0%,100%{translate:0 0}50%{translate:0 -9px}}
+@keyframes c360-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+html body .intelligence-hero{animation:c360-rise .55s both}
+html body .intelligence-kpi-grid>*{animation:c360-rise .55s both}
+html body .intelligence-kpi-grid>*:nth-child(1){animation-delay:.06s}html body .intelligence-kpi-grid>*:nth-child(2){animation-delay:.12s}html body .intelligence-kpi-grid>*:nth-child(3){animation-delay:.18s}html body .intelligence-kpi-grid>*:nth-child(4){animation-delay:.24s}
+html body .intelligence-main-grid>*,html body .intelligence-side-stack>*,html body .workflow-panel,html body .table-panel{animation:c360-rise .6s .3s both}
+html body .ecosystem-node{animation:c360-bob 5.5s ease-in-out infinite}
+html body .ecosystem-node.node-two{animation-delay:-1.8s}html body .ecosystem-node.node-three{animation-delay:-3.4s}
+html body .priority-chart-track i{transform-origin:left;animation:c360-grow .9s .45s cubic-bezier(.2,.8,.2,1) both}
+/* responsive: rail becomes a floating dock on phones */
+@media(max-width:860px){
+  html body .app-shell{grid-template-columns:minmax(0,1fr)!important;padding:10px 10px 96px!important;gap:12px!important}
+  html body .sidebar{position:fixed!important;top:auto!important;bottom:12px!important;left:12px!important;right:12px!important;width:auto!important;height:64px!important;min-height:0!important;flex-direction:row!important;padding:8px 14px!important;border-radius:999px!important}
+  html body .sidebar nav{flex-direction:row!important;justify-content:space-around!important;padding:0!important}
+  html body .sidebar .brand,html body .sidebar-bottom{display:none!important}
+  html body .nav-item::after{display:none}
+  html body .topbar-search{width:100%!important}
+}
+@media(prefers-reduced-motion:reduce){html body *{animation:none!important}}

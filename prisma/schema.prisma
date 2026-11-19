@@ -1,0 +1,144 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Department {
+  id String @id @default(cuid())
+  name String @unique
+  staff StaffProfile[]
+  createdAt DateTime @default(now())
+}
+model JobScope {
+  id String @id @default(cuid())
+  name String @unique
+  staff StaffProfile[]
+  jobCompetencies JobCompetency[]
+  questions SurveyQuestion[]
+  cycleJobCompetencies CycleJobCompetency[]
+}
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  passwordHash String
+  name String
+  role String
+  staffProfile StaffProfile?
+  createdAt DateTime @default(now())
+}
+model StaffProfile {
+  id String @id @default(cuid())
+  employeeNo String @unique
+  userId String @unique
+  departmentId String
+  jobScopeId String
+  supervisorId String?
+  user User @relation(fields: [userId], references: [id])
+  department Department @relation(fields: [departmentId], references: [id])
+  jobScope JobScope @relation(fields: [jobScopeId], references: [id])
+  supervisor StaffProfile? @relation("StaffSupervisor", fields: [supervisorId], references: [id])
+  directReports StaffProfile[] @relation("StaffSupervisor")
+  assessments Assessment[]
+}
+model Competency {
+  id String @id @default(cuid())
+  name String @unique
+  description String?
+  jobCompetencies JobCompetency[]
+  questions SurveyQuestion[]
+  ratings SupervisorRating[]
+  results AssessmentResult[]
+  cycleJobCompetencies CycleJobCompetency[]
+}
+model JobCompetency {
+  id String @id @default(cuid())
+  jobScopeId String
+  competencyId String
+  requiredLevel Int
+  jobScope JobScope @relation(fields: [jobScopeId], references: [id])
+  competency Competency @relation(fields: [competencyId], references: [id])
+  @@unique([jobScopeId, competencyId])
+}
+
+model CycleJobCompetency {
+  id String @id @default(cuid())
+  cycleId String
+  jobScopeId String
+  competencyId String
+  requiredLevel Int
+  cycle AssessmentCycle @relation(fields: [cycleId], references: [id], onDelete: Cascade)
+  jobScope JobScope @relation(fields: [jobScopeId], references: [id])
+  competency Competency @relation(fields: [competencyId], references: [id])
+  @@unique([cycleId, jobScopeId, competencyId])
+}
+
+model SurveyQuestion {
+  id String @id @default(cuid())
+  jobScopeId String
+  competencyId String
+  text String
+  negativelyWorded Boolean @default(false)
+  jobScope JobScope @relation(fields: [jobScopeId], references: [id])
+  competency Competency @relation(fields: [competencyId], references: [id])
+  responses SelfResponse[]
+}
+model AssessmentCycle {
+  id String @id @default(cuid())
+  name String @unique
+  year Int
+  status String @default("OPEN")
+  assessments Assessment[]
+  cycleJobCompetencies CycleJobCompetency[]
+  createdAt DateTime @default(now())
+}
+model Assessment {
+  id String @id @default(cuid())
+  staffId String
+  cycleId String
+  status String @default("DRAFT")
+  selfSubmittedAt DateTime?
+  supervisorSubmittedAt DateTime?
+  staff StaffProfile @relation(fields: [staffId], references: [id])
+  cycle AssessmentCycle @relation(fields: [cycleId], references: [id])
+  responses SelfResponse[]
+  ratings SupervisorRating[]
+  results AssessmentResult[]
+  @@unique([staffId, cycleId])
+}
+model SelfResponse {
+  id String @id @default(cuid())
+  assessmentId String
+  questionId String
+  score Int
+  assessment Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  question SurveyQuestion @relation(fields: [questionId], references: [id])
+  @@unique([assessmentId, questionId])
+}
+model SupervisorRating {
+  id String @id @default(cuid())
+  assessmentId String
+  competencyId String
+  supervisorId String
+  score Int
+  assessment Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  competency Competency @relation(fields: [competencyId], references: [id])
+  @@unique([assessmentId, competencyId])
+}
+model AssessmentResult {
+  id String @id @default(cuid())
+  assessmentId String
+  competencyId String
+  requiredLevel Float
+  selfAverage Float
+  supervisorScore Float
+  actualLevel Float
+  gap Float
+  category String
+  assessment Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  competency Competency @relation(fields: [competencyId], references: [id])
+  @@unique([assessmentId, competencyId])
+}
